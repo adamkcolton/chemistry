@@ -19,6 +19,7 @@
 <body style='margin : 0px; overflow: hidden;'>
     <a-scene embedded arjs>
         <a-marker preset="hiro" id="marker">
+            <!-- <a-box color = "green" position = "0 0 0"></a-box> -->
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
@@ -26,8 +27,8 @@
 
     <script>
         var i = 0;
-        var n = 2;
-
+        var n = 10;
+        var id = 0;
         /* List of molecules on screen*/
         var molecules = [];
 
@@ -114,7 +115,7 @@
         }
         function addAtom(atom) {
             $("#marker").append(
-                '<a-sphere id =\"' + "id" + (i++) + '\"color = ' + getColorOfAtom(atom) + ' position = "0 0 0" radius = ".1"></a-box>'
+                '<a-sphere id =\"' + "id" + (id++) + '\"color = ' + getColorOfAtom(atom) + ' position = "0 0 0" radius = "0.5"></a-box>'
             );
         }
         function getColorOfAtom(atom) {
@@ -138,32 +139,33 @@
         };
 
         function calcPosChange(pos, targetPos) {
+            console.log("Before: " + pos + " " + targetPos);
             if (Math.abs(pos - targetPos) > .01) {
-                pos += targetPos * 0.1;
+                pos -= (pos - targetPos) * 0.1;
+                console.log("After: " + pos + " " + targetPos);
+
             }
             return pos;
         }
 
-       setInterval(function() {
+        setInterval(function () {
             //If not at target position animate
             var moleculePosition = [0, 0, 0];
             console.log("Moving");
-            for (let i = 0; i < n; i++) {
+
+            for (let i = 0; i < id; i++) {
                 var element = document.getElementById("id" + i);
                 if (element != null) {
-                    var position = (document.getElementById("id" + i).getAttribute("position")).split(" ");
+                    var position = (document.getElementById("id" + i).getAttribute("position"));
                     //Need to have a way to get the moleculePosition for the function call.
                     var targetPosition = calcTargetPosition(moleculePosition, i);
-                    var posX = parseInt(position[0]);
-                    var posY = parseInt(position[2]);
-                    var posZ = parseInt(position[4]);
+                    console.log(position);
+
+                    var posX = calcPosChange(position.x, targetPosition[0]);
+                    var posY = calcPosChange(position.y, targetPosition[1]);
+                    var posZ = calcPosChange(position.z, targetPosition[2]);
 
 
-                    posX = calcPosChange(posX, targetPosition[0]);
-                    posY = calcPosChange(posY, targetPosition[1]);
-                    posZ = calcPosChange(posZ, targetPosition[2]);
-
-                    
                     document.getElementById("id" + i).setAttribute("position", posX + " " + posY + " " + posZ);
 
                 }
