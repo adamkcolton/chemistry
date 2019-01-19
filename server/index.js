@@ -4,7 +4,7 @@ const http = require('http').Server(app);
 const path = require('path');
 const bodyParser = require('body-parser');
 const aws = require('aws-sdk');
-// const pt = require('periodic-table');
+const fetch = require('node-fetch');
 const s3 = new aws.S3();
 
 const SERVER_PORT = 3000;
@@ -24,9 +24,9 @@ app.get('/', (req, res) => {
 app.get('/api/chemData', (req, res) => {
 
   let chemData = {
-    "glucose": { "count": 0 },
-    "oxygen": { "count": 0 },
-    "uranium": { "count": 0 }
+    "glucose": { "amount": 0 },
+    "oxygen": { "amount": 0 },
+    "uranium": { "amount": 0 }
   };
 
   res.send(chemData);
@@ -34,32 +34,30 @@ app.get('/api/chemData', (req, res) => {
 
 
 app.post('/api/alexaData', (req, res) => {
-  var getParams = {
-    Bucket: 'abc', // your bucket name,
-    Key: 'abc.txt' // path to the object you're looking for
-}
+  var params = {
+    Bucket: "s3/cruzhacks",
+    Key: "molecules"
+  };
 
-s3.getObject(getParams, function(err, data) {
-    // Handle any error and exit
-    if (err)
-        return err;
+  s3.getObject(params, function (err, data) {
+    if (err) console.log(err, err.stack); // an error occurred
+    else {
+      fetch('https://s3.amazonaws.com/cruzhacks/schema.json')
+        .then(res => res.json())
+        .then(json => console.log(json));
+    }       
+  });
 
-  // No error happened
-  // Convert Body from a Buffer to a String
 
-  let objectData = data.Body.toString('utf-8'); // Use the encoding necessary
+
 });
 
-
-
+app.use((req, res) => {
+  res.status(404).json({
+    message: 'resource not found',
   });
+});
 
-  app.use((req, res) => {
-    res.status(404).json({
-      message: 'resource not found',
-    });
-  });
-
-  http.listen(process.env.PORT || SERVER_PORT, () => {
-    console.log(`Server started on http://localhost:${SERVER_PORT}`);
-  });
+http.listen(process.env.PORT || SERVER_PORT, () => {
+  console.log(`Server started on http://localhost:${SERVER_PORT}`);
+});

@@ -139,10 +139,10 @@
         };
 
         function calcPosChange(pos, targetPos) {
-            console.log("Before: " + pos + " " + targetPos);
+            // console.log("Before: " + pos + " " + targetPos);
             if (Math.abs(pos - targetPos) > .01) {
                 pos -= (pos - targetPos) * 0.1;
-                console.log("After: " + pos + " " + targetPos);
+                // console.log("After: " + pos + " " + targetPos);
 
             }
             return pos;
@@ -151,7 +151,7 @@
         setInterval(function () {
             //If not at target position animate
             var moleculePosition = [0, 0, 0];
-            console.log("Moving");
+            // console.log("Moving");
 
             for (let i = 0; i < id; i++) {
                 var element = document.getElementById("id" + i);
@@ -159,7 +159,7 @@
                     var position = (document.getElementById("id" + i).getAttribute("position"));
                     //Need to have a way to get the moleculePosition for the function call.
                     var targetPosition = calcTargetPosition(moleculePosition, i);
-                    console.log(position);
+                    // console.log(position);
 
                     var posX = calcPosChange(position.x, targetPosition[0]);
                     var posY = calcPosChange(position.y, targetPosition[1]);
@@ -170,7 +170,7 @@
 
                 }
                 else {
-                    console.log(i + " does not exist");
+                    // console.log(i + " does not exist");
                 }
             }
         }, 1000);
@@ -197,13 +197,14 @@
         // append();
         // setInterval(moveToPosition, 1000);
 
-        // axios.get('/api/data/').then(function (symbol) {
-        //     //Build Function gets called or I can have it in here.
-        //     console.log(symbol);
-        //     // buildMolecule(symbol);
-        // }).catch(function (error) {
-        //     comsole.log(error);
-        // });
+        axios.get('/api/data/').then(function (json) {
+            //Build Function gets called or I can have it in here.
+            console.log(json);
+            console.log(json.data);
+            // buildMolecule(symbol);
+        }).catch(function (error) {
+            console.log(error);
+        });
 
     </script>
 </body>
