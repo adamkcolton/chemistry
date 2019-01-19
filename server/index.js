@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const pt = require('periodic-table');
 
 const SERVER_PORT = 3000;
-require('./alexa');
+// require('./alexa');
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -18,15 +18,26 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + 'index.html'));
 });
 
+
 app.get('/api/data', (req, res) => {
 
-  let data = {
-    "glucose":{"count":0},
-    "oxygen":{"count":0},
-    "uranium":{"count":0}
+  let chemData = {
+    "glucose": { "count": 0 },
+    "oxygen": { "count": 0 },
+    "uranium": { "count": 0 }
   };
   
-  res.send(data);
+  res.send(chemData);
+});
+
+app.post('/api/alexa', (req, res) => {
+  const alexaData = {
+    
+
+  }
+
+
+
 });
 
 app.use((req, res) => {
