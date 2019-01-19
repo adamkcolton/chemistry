@@ -23,7 +23,7 @@ const done = response => {
   }
 }
 
-const molecule = {
+const molecules = {
   oxygen: '78',
   hydrogen: '143',
   carbon: '46',
@@ -31,18 +31,18 @@ const molecule = {
   uranium: '7',
 }
 
-const getMolecule = event => {
+const getmolecules = event => {
   let element = event.pathParameters.element;
-  return molecule[element];
+  return molecules[element];
 }
 
-const putMolecule = async event => {
+const putmolecules = async event => {
   let {
-    molecule
+    molecules
   } = JSON.parse(event.body);
   let element = event.pathParameters.element;
-  let ID = `${molecule}-${element}`;
-  return Dynamo.increment(ID, 'molecule-element')
+  let ID = `${molecules}-${element}`;
+  return Dynamo.increment(ID, 'molecules-element')
 }
 
 // ------------------------------------------------------------------
@@ -67,10 +67,10 @@ if (process.argv.indexOf('--webhook') > -1) {
 exports.handler = async (event, context, callback) => {
   console.log(event);
   if (event.httpMethod === 'PUT') {
-    let response = await putMolecule(event)
+    let response = await putmolecules(event)
     return done(response);
   } else if (event.httpMethod === 'GET') {
-    let response = getMolecule(event);
+    let response = getmolecules(event);
     return done(response);
   }
 
