@@ -4,14 +4,15 @@
 -->
 
 <html>
-<head>
-  <title>ChemisTRY</title>
-  <meta charset="utf-8" />
 
-  <!--First = A-Frame. Second AR.JS Thrid = axios-->
-  <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
-  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<head>
+    <title>ChemisTRY</title>
+    <meta charset="utf-8" />
+
+    <!--First = A-Frame. Second AR.JS Thrid = axios-->
+    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body style='margin : 0px; overflow: hidden;'>
@@ -30,7 +31,7 @@
     <script>
         //For actually building the molecule.
         var i = 0;
-        var n = 4;
+        var n = 24;
 
         /* Glucose (C6H12O6) Properties */
         var GLUCOSE_POSITIONS = [
@@ -100,46 +101,49 @@
             }
             while (i < n) {
                 $("#marker").append(
-                    '<a-box id =\"' + id + " " + i + '\"color = "green" position = \"' + positions[i++] + '\" depth = ".5" height = ".5" width = ".5"></a-box>'
+                    '<a-box id =\"' + id + i + '\"color = "green" position = \"' + positions[i++] + '\" depth = ".5" height = ".5" width = ".5"></a-box>'
                 );
             }
         });
 
-        function isAtTarget(pos, targetPos){
-            
+        function calcPosChange(pos, targetPos) {
+            if (Math.abs(pos - targetPos) > .01) {
+                pos += targetPos * 0.1;
+            }
+            return pos;
         }
 
         function moveToPosition() {
             //If not at target position animate
+            var moleculePosition = [0, 0, 0];
             for (let i = 0; i < n; i++) {
                 var position = (getElementById.getAttribute("id" + i)).split(" ");
-                //Need to have a way to get the overallPosition for the function call.
-                var targetPosition = calcTargetPosition(position);
+                //Need to have a way to get the moleculePosition for the function call.
+                var targetPosition = calcTargetPosition(moleculePosition, i);
                 var posX = Integer.parseInt(position[0]);
                 var posY = Integer.parseInt(position[2]);
                 var posZ = Integer.parseInt(position[4]);
 
                 while (posX != targetPosition[0] && posY != targetPosition[1] && posZ != targetPosition[3]) {
-                    if (posX != targetPosition[0])
-                        posX += (posX - targetPosition[0]) * .1;
-                    if (posy != targetPosition[1])
-                        posY += (posY - targetPosition[1]) * .1;
-                    if (posZ != targetPosition[3])
-                        posZ += (posZ - targetPosition[3]) * .1;
+                    posX = calcPosChange(posX, targetPosition[0]);
+                    posY = calcPosChange(posY, targetPosition[1]);
+                    posZ = calcPosChange(posZ, targetPosition[2]);
+
                     getElementById("id" + i).setAttribute("position", posX + " " + posY + " " + posZ);
                 }
             }
         }
 
-        function calcTargetPosition(overallPosition) {
+        function calcTargetPosition(moleculePosition, elementNumber) {
             //Based on index see where you need to be. 
             var targetPosition = [];
+            var offSet = GLUCOSE_POSITIONS[i].split(" ");
+            var offSetX = Integer.parseInt(offSet[0]);
+            var offSetZ = Integer.parseInt(offSet[2]);
 
-
-
-
-
-
+            targetPosition[0] = overallPosition[0] + offSetX;
+            targetPosition[1] = overallPosition[1];
+            targetPosition[2] = overallPosition[2] + offSetZ;
 
             return targetPosition;
         }
