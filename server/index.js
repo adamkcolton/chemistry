@@ -21,7 +21,8 @@ app.get('/', (req, res) => {
 
 app.get('/api/symbol', (req, res) => {
   let he = pt.elements.Helium
-  res.send(he);
+  elemSymbol = he.symbol;
+  res.send(elemSymbol);
 });
 
 app.use((req, res) => {

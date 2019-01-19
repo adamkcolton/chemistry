@@ -31,14 +31,12 @@
             );
         }
 
-        function getElement(){
-            return axios.get('/symbol/');
-        }
-
-        axois.get(getMolecule()).then(function (symbol){
+        axios.get('/api/symbol/').then(function (symbol){
             //Build Function gets called or I can have it in here.
             console.log(symbol);
-            buildMolecule(symbol);
+            // buildMolecule(symbol);
+        }).catch(function (error) { 
+            comsole.log(error);
         });
 
         
