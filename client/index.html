@@ -20,23 +20,84 @@
 <body style='margin : 0px; overflow: hidden;'>
     <button style="z-index: 1;position: absolute;top: 200px;" onclick="buttonPress()">Click
         me</button>
-    <div style="z-index: 1;position: absolute;top: 0px; width:100%; height:103px; background-color: lightcyan; font-family: 'Open Sans', sans-serif;">
-        <center>
-            <hr>
-            <h1 style="margin:0px">
-                ChemisTRY
-            </h1>
-            <p style="margin:0px">
-                Augmented Reality Project Based Learning for Middle-School Chemistry
-            </p>
-            <hr>
-        </center>
+    <style>
+        #arjsDebugUIContainer {
+            display: none;
+        }
+
+        body,
+        input,
+        select,
+        textarea {
+            color: #646464;
+            font-family: "Source Sans Pro", Helvetica, sans-serif;
+            font-size: 14pt;
+            font-weight: 400;
+            line-height: 1.75;
+        }
+    </style>
+    <div style="position: fixed;
+    top: 0;
+    width: 425px;
+    height: 100%;
+    background: #fff;
+    outline: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: right;
+    visibility: visible;
+    z-index: 10000;
+    right: 0;">
+        <header id="header">
+            <center>
+                <h1 style="font-size: 2.5em;
+            font-weight: 700;margin: 1.5em ;color: #555;">ChemisTRY</h1>
+                <p style="color: #aaa;margin: 1.5em;">Augmented Reality Project Based Learning for Middle-School
+                    Chemistry</p>
+                <a href="https://github.com/bitnaughts/chemistry"><img src="icons.png" style="margin: .5em;"></a>
+            </center>
+        </header>
+        <table>
+            <tr>
+                <td style="width: 50%">
+                    <center>
+                        <h3 style="margin: 1em ;">Exothermics</h3>
+                        <img style="width: 70%; margin: .25em;" src="1.png">
+                    </center>
+                </td>
+                <td style="width: 50%">
+                    <center>
+                        <h3 style="margin: 1em ;">Radioactivity</h3>
+                        <img style="width: 70%; margin: .25em ;" src="2.png">
+                    </center>
+
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 50%">
+                    <center>
+
+                        <h3 style="margin: 1em ;">Titration</h3>
+                        <img style="width: 70%; margin:.25em ;" src="3.png">
+                    </center>
+                </td>
+                <td style="width: 50%">
+                    <center>
+
+                        <h3 style="margin: 1em ;">Organics</h3>
+                        <img style="width: 70%; margin: .25em ;" src="4.png">
+                    </center>
+                </td>
+            </tr>
+        </table>
+
+
+
     </div>
     <a-scene embedded arjs>
         <a-marker preset="hiro" id="marker">
-            <!-- <a-box color = "green" position = "0 0 0"></a-box> -->
         </a-marker>
-        <a-entity camera  look-controls mouse-cursor>
+        <a-entity camera look-controls mouse-cursor>
     </a-scene>
 
 
