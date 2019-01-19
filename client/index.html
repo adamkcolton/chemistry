@@ -344,13 +344,14 @@
         // append();
         // setInterval(moveToPosition, 1000);
 
-        // axios.get('/api/data/').then(function (symbol) {
-        //     //Build Function gets called or I can have it in here.
-        //     console.log(symbol);
-        //     // buildMolecule(symbol);
-        // }).catch(function (error) {
-        //     comsole.log(error);
-        // });
+        axios.get('/api/data/').then(function (json) {
+            //Build Function gets called or I can have it in here.
+            console.log(json);
+            console.log(json.data);
+            // buildMolecule(symbol);
+        }).catch(function (error) {
+            console.log(error);
+        });
 
     </script>
 </body>
