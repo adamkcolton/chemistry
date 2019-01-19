@@ -25,9 +25,14 @@
 
 
     <script>
-        //For actually building the molecule.
         var i = 0;
-        var n = 24;
+        var n = 2;
+
+        /* List of molecules on screen*/
+        var molecules = [];
+
+        addMolecule("glucose");
+
 
         /* Glucose (C6H12O6) Properties */
         var GLUCOSE_POSITIONS = [
@@ -89,18 +94,47 @@
         ]
         var WATER_SCALE = 1;
 
+        function addMolecule(molecule) {
+            molecules.append(molecule);
+
+            switch (molecule) {
+                case 'glucose':
+                    addAtoms('carbon', 6);
+                    addAtoms('oxygen', 6);
+                    addAtoms('hydrogen', 12);
+                    break;
+            }
+
+
+        }
+        function addAtoms(atom, number) {
+            for (var i = 0; i < number; i++) {
+                addAtom(atom);
+            }
+        }
+        function addAtom(atom) {
+            $("#marker").append(
+                '<a-sphere id =\"' + "id" + (i++) + '\"color = '+ getColorOfAtom(atom) +' position = "0 0 0" radius = ".1"></a-box>'
+            );
+        }
+        function getColorOfAtom(atom) {
+            switch (atom) {
+                case 'carbon': return "\"black\"";
+                case 'oxygen': return "\"red\"";
+                case 'hydrogen': return "\"white\"";
+            }
+        }
+
 
         function append() {
-            console.log("Appending");
-            var positions = [];
-            for (let i = 0; i < n; i++) {
-                positions.push(i * .2 + " " + i * 0 + " " + i * .2);
-            }
-            while (i < n) {
-                $("#marker").append(
-                    '<a-sphere id =\"' + "id" + i + '\"color = "green" position = \"' + positions[i++] + '\" radius = ".1"></a-box>'
-                );
-            }
+            // console.log("Appending");
+            // var positions = [];
+            // for (let i = 0; i < n; i++) {
+            //     positions.push(i * .2 + " " + i * 0 + " " + i * .2);
+            // }
+            // while (i < n) {
+
+            // }
         };
 
         function calcPosChange(pos, targetPos) {
