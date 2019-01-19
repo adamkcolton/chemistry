@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const aws = require('aws-sdk');
 // const pt = require('periodic-table');
+const s3 = new aws.S3();
 
 const SERVER_PORT = 3000;
 // require('./alexa');
@@ -20,7 +21,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/api/data', (req, res) => {
+app.get('/api/chemData', (req, res) => {
 
   let chemData = {
     "glucose": { "count": 0 },
@@ -32,15 +33,22 @@ app.get('/api/data', (req, res) => {
 });
 
 
-const s3 = new aws.S3();
-params = {
-  Bucket: "s3/cruzhacks",
-  Key: "TILES/Level4/A3_B3_C2/.par"
+app.post('/api/alexaData', (req, res) => {
+  var getParams = {
+    Bucket: 'abc', // your bucket name,
+    Key: 'abc.txt' // path to the object you're looking for
 }
-app.post('/api/alexa', (req, res) => {
-    aws.getSignedUrl('getObject', params, function (err, url) {
-      console.log(url);
-    });
+
+s3.getObject(getParams, function(err, data) {
+    // Handle any error and exit
+    if (err)
+        return err;
+
+  // No error happened
+  // Convert Body from a Buffer to a String
+
+  let objectData = data.Body.toString('utf-8'); // Use the encoding necessary
+});
 
 
 
