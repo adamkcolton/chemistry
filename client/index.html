@@ -2,17 +2,47 @@
 <!--
     CruzHacks 2019
 -->
+
+
 <html>
-
+    <!--First = A-Frame. Second AR.JS Thrid = axios-->
+    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"> </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <head>
-
     <title>ChemisTRY</title>
     <meta charset="utf-8" />
 </head>
 
-<body>
-    <h2>test</h2>
+<body style='margin : 0px; overflow: hidden;'>
+        <a-scene embedded arjs>
+          <a-marker preset="pattern" url = "myMarker.patt" id = "marker">
+              
+          </a-marker>
+          <a-entity camera></a-entity>
+        </a-scene>
 
+    
+    <script>
+        //For actually building the molecule.
+        function buildMolecule(molecule){
+            $("#marker").append(
+                 '<a-box color = "green" position = ".5 .5 .5" depth = ".5" height = ".5" width = ".5"></a-box>'
+            );
+        }
+
+        function getElement(){
+            return axios.get('/symbol/');
+        }
+
+        axois.get(getMolecule()).then(function (symbol){
+            //Build Function gets called or I can have it in here.
+            console.log(symbol);
+            buildMolecule(symbol);
+        });
+
+        
+    </script>
 </body>
 
 </html>
