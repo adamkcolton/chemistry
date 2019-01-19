@@ -325,10 +325,10 @@ function reassignElements(moleculeIndex) {
     console.log("AFTER Change")
 }
 
-axios.get('/api/data/').then(function (json) {
+axios.get('/api/alexaData/').then(function (json) {
     //Build Function gets called or I can have it in here.
     console.log(json);
-    console.log(json.data);
+    // console.log(json.data);
     // buildMolecule(symbol);
 }).catch(function (error) {
     console.log(error);

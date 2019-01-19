@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "ask-sdk": "^2.3.0",
+    "aws-sdk": "^2.391.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "jovo-db-filedb": "^2.0.9",
@@ -30,6 +31,7 @@
     "jovo-platform-alexa": "^2.0.11",
     "jovo-platform-googleassistant": "^2.0.11",
     "jovo-plugin-debugger": "^2.0.9",
+    "node-fetch": "^2.3.0",
     "nodemon": "^1.18.9",
     "periodic-table": "^0.0.8"
   },
