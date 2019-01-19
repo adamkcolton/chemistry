@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "ask-sdk": "^2.3.0",
+    "aws-sdk": "^2.391.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "jovo-db-filedb": "^2.0.9",

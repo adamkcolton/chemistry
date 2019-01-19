@@ -1,0 +1,14 @@
+{
+  "molecules": [
+    {
+      "name": "glucose",
+      "amount": 0
+    }, {
+      "name": "oxygen",
+      "amount": 0
+    }, {
+      "name": "uranium",
+      "amount": 0
+    }
+  ]
+}

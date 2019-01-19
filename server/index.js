@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const aws = require('aws-sdk');
 const fetch = require('node-fetch');
 const s3 = new aws.S3();
+const pt = require('periodic-table');
 
 const SERVER_PORT = 3000;
 // require('./alexa');
@@ -32,6 +33,13 @@ app.get('/api/chemData', (req, res) => {
   res.send(chemData);
 });
 
+app.get('/api/mData', (req, res) => {
+  var o = pt.elements.Oxygen;
+  console.log(o);
+
+  res.send(mData);
+});
+
 
 app.post('/api/alexaData', (req, res) => {
   var params = {
@@ -45,7 +53,7 @@ app.post('/api/alexaData', (req, res) => {
       fetch('https://s3.amazonaws.com/cruzhacks/schema.json')
         .then(res => res.json())
         .then(json => console.log(json));
-    }       
+    }
   });
 
 
