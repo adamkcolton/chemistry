@@ -34,7 +34,7 @@
 
         var atomId = 0;
         var moleculeId = 0;
-        
+
         /* List of molecules on screen*/
         function Molecule(name, posX, posY, posZ) {
             this.name = name;
@@ -147,7 +147,7 @@
         function addAtom(atom) {
             moleculeList[moleculeId].atomList.push(atomId);
             $("#marker").append(
-                '<a-sphere id =\"' + "id" + (atomId++) + '\"color = "' + getColorOfAtom(atom) + '" position = "0 0 0" radius = \"' + getRadiusOfAtom(atom) / 6 + '\"></a-box>'
+                '<a-sphere id =\"' + "id" + (atomId++) + '\"color = "' + getColorOfAtom(atom) + '" position = "0 ' + getYOfAtom(atom) + ' 0" radius = \"' + getRadiusOfAtom(atom) / 6 + '\"></a-box>'
             );
         }
         function getColorOfAtom(atom) {
@@ -164,12 +164,26 @@
                 case 'hydrogen': return .4;
             }
         }
+        function getYOfAtom(atom) {
+            switch (atom) {
+                case 'carbon': return -.1;
+                case 'oxygen': return -.05;
+                case 'hydrogen': return 0;
+            }
+        }
 
         function calcPosChange(pos, targetPos) {
             if (Math.abs(pos - targetPos) > .01) {
-                pos -= (pos - targetPos) * 0.05;
+                pos -= clampSpeed((pos - targetPos) * 0.05);
             }
             return pos;
+        }
+
+        var MAX_SPEED = .04;
+        function clampSpeed(value) {
+            if (value > MAX_SPEED) return MAX_SPEED;
+            if (value < -MAX_SPEED) return -MAX_SPEED;
+            return value;
         }
 
         /* Animate particles to calculated positions */
@@ -182,11 +196,20 @@
                     if (element != null) {
                         var position = (document.getElementById("id" + i).getAttribute("position"));
                         var targetPosition = calcTargetPosition(moleculePosition, i);
-                        document.getElementById("id" + i).setAttribute("position", calcPosChange(position.x, targetPosition[0]) + " 0 " + calcPosChange(position.z, targetPosition[2]));
+                        document.getElementById("id" + i).setAttribute("position", calcPosChange(position.x, targetPosition[0]) + " " + position.y + " " + calcPosChange(position.z, targetPosition[2]));
                     }
                 }
             }
-        }, 10);
+        }, 30);
+
+
+        /* Move molecules around */
+        var molecule_to_update = 0;
+        setInterval(function () {
+            moleculeList[molecule_to_update].posX = Math.random() * 5 - 2.5;
+            moleculeList[molecule_to_update++].posZ = Math.random() * 5 - 2.5;
+            if (molecule_to_update >= moleculeId) molecule_to_update = 0;
+        }, 200);
 
         function getMoleculeFromId(elementNumber) {
             for (var i = 0; i < moleculeId; i++) {
@@ -201,7 +224,6 @@
             return "not found";
         }
         function getAtomIndexFromId(elementNumber) {
-
             for (var i = 0; i < moleculeId; i++) {
                 if (moleculeList[i].atomList != null) {
                     for (var j = 0; j < moleculeList[i].atomList.length; j++) {
