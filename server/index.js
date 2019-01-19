@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const pt = require('periodic-table');
 
 const SERVER_PORT = 3000;
+require('./alexa');
 
 app.use(bodyParser.urlencoded({
   extended: true
