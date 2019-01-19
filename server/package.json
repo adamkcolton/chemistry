@@ -19,7 +19,7 @@
     "launch": "npm start -- --launch",
     "start": "cd src && node index.js --webhook",
     "test": "jest",
-    "tsc": "node -v"
+    "tsc": "echo node && node -v && echo npm && npm -v && echo 'yarn' && yarn -v"
   },
   "dependencies": {
     "ask-sdk": "^2.3.0",
