@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Alexa and AR.JS built on top of NodeJS",
+  "repository": "https://github.com/bitnaughts/chemistry.git",
+  "license": "MIT",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "nodemon": "^1.18.9"
+  },
+  "authors": [
+    "Adrian Darian",
+    "Brian Hungerman",
+    "Dan Tran",
+    "Denis Vashchenko"
+  ],
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  }
+}
