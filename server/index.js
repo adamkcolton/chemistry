@@ -18,12 +18,15 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + 'index.html'));
 });
 
+app.get('/api/data', (req, res) => {
 
-
-app.get('/api/symbol', (req, res) => {
-  let he = pt.elements.Helium
-  elemSymbol = he.symbol;
-  res.send(elemSymbol);
+  let data = {
+    "glucose":{"count":0},
+    "oxygen":{"count":0},
+    "uranium":{"count":0}
+  };
+  
+  res.send(data);
 });
 
 app.use((req, res) => {

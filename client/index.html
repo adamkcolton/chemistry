@@ -3,7 +3,6 @@
     CruzHacks 2019
 -->
 
-
 <html>
 <head>
   <title>ChemisTRY</title>
@@ -16,31 +15,99 @@
 </head>
 
 <body style='margin : 0px; overflow: hidden;'>
-  <a-scene embedded arjs>
-    <a-marker preset="pattern" url="myMarker.patt" id="marker">
+    <a-scene embedded arjs>
+        <a-marker preset="hiro" id="marker">
+            <!-- Testing add this to a function later. Glucose -->
+            <!-- <a-sphere color = "#CCCCCC" position = "0.0 0.0 0.0" radius = ".3"></a-sphere>
+            <a-sphere color = "#CCCCCC" position = "0.6 0.0 0.0" radius = ".3"></a-sphere>
+            <a-sphere color = "#CCCCCC" position = "0.0 0.0 0.6" radius = ".3"></a-sphere>
+            <a-sphere color = "#CCCCCC" position = "0.6 0.0 0.6" radius = ".3"></a-sphere> -->
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
 
-    </a-marker>
-    <a-entity camera></a-entity>
-  </a-scene>
+
+    <script>
+        //For actually building the molecule.
+        var i = 0;
+        var n = 4;
+
+        /* Glucose (C6H12O6) Properties */
+        var GLUCOSE_POSITIONS = [
+            /* Carbons (0-5) */
+            "-2.5 -.5 0",
+            "-1.5 .5 0",
+            "-.5 -.5 0",
+            ".5 .5 0",
+            "1.5, -.5 0",
+            "2.5, .5 0",
+            /* Oxygens (6-11) */
+            "-2.5 -1.5 0",
+            "-1.5 1.5 0",
+            "-.5 -1.5 0",
+            ".5 1.5 0",
+            "1.5, -1.5 0",
+            "2.5, 1.5 0",
+            /* Hydrogens (12-23) */
+            "-2.75 -1.75 0",
+            "-2.25 -1.75 0",
+            "-1.75 1.75 0",
+            "-1.25 1.75 0",
+            "-.75 -1.75 0",
+            "-.25 -1.75 0",
+            ".75 1.75 0",
+            ".25 1.75 0",
+            "1.75, -1.75 0",
+            "1.25, -1.75 0",
+            "2.75, 1.75 0",
+            "2.25, 1.75 0",
+        ];
+        var GLUCOSE_SCALE = 1;
 
 
-  <script type="javascript">
-    // For actually building the molecule.
-    function buildMolecule(molecule){
-        $("#marker").append(
-              '<a-box color = "green" position = ".5 .5 .5" depth = ".5" height = ".5" width = ".5"></a-box>'
-        );
-    }
+        $(function () {
+            var positions = [];
+            for (let i = 0; i < n; i++) {
+                positions.push(i + " " + i + " " + i);
+            }
+            while (i < n) {
+                $("#marker").append(
+                    '<a-box id =\"' + id + " " + i + '\"color = "green" position = \"' + positions[i++] + '\" depth = ".5" height = ".5" width = ".5"></a-box>'
+                );
+            }
+        });
 
-    axios.get('/api/symbol/').then(function (symbol){
-        //Build Function gets called or I can have it in here.
-        console.log(symbol);
-        // buildMolecule(symbol);
-    }).catch(function (error) { 
-        comsole.log(error);
-    });
+        function moveToPosition() {
+            //If not at target position animate
+            for (let i = 0; i < n; i++) {
+                var position = (getElementById.getAttribute("position")).split(" ");
+                getElementById("id" + i).setAttribute('position');
+            }
+        }
 
-  </script>
+        function calcTargetPosition(overallPosition) {
+            //Based on index see where you need to be. 
+            var targetPosition = [];
+
+
+
+
+
+
+
+            return targetPosition;
+        }
+
+
+        axios.get('/api/data/').then(function (symbol) {
+            //Build Function gets called or I can have it in here.
+            console.log(symbol);
+            // buildMolecule(symbol);
+        }).catch(function (error) {
+            comsole.log(error);
+        });
+
+    </script>
 </body>
 
 </html>
