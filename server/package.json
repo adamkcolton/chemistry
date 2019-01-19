@@ -3,24 +3,47 @@
   "version": "1.0.0",
   "private": false,
   "description": "Alexa and AR.JS built on top of NodeJS",
-  "repository": "https://github.com/bitnaughts/chemistry.git",
+  "homepage": "https://github.com/bitnaughts/chemistry#reademe",
+  "bugs": {
+    "url": "https://github.com/bitnaughts/chemistry/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitnaughts/chemistry.git"
+  },
   "license": "MIT",
-  "main": "index.js",
+  "main": "src/index.js",
+  "scripts": {
+    "bundle": "gulp --gulpfile node_modules/jovo-framework/gulpfile.js --cwd ./",
+    "dev": "nodemon server.js",
+    "launch": "npm start -- --launch",
+    "start": "cd src && node index.js --webhook",
+    "test": "jest",
+    "tsc": "echo node && node -v && echo npm && npm -v && echo 'yarn' && yarn -v"
+  },
   "dependencies": {
     "ask-sdk": "^2.3.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "jovo-db-filedb": "^2.0.9",
+    "jovo-framework": "^2.0.10",
+    "jovo-platform-alexa": "^2.0.11",
+    "jovo-platform-googleassistant": "^2.0.11",
+    "jovo-plugin-debugger": "^2.0.9",
     "nodemon": "^1.18.9",
     "periodic-table": "^0.0.8"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-install": "^1.1.0",
+    "gulp-run-command": "^0.0.9",
+    "gulp-zip": "^4.2.0",
+    "jest": "^23.6.0"
   },
   "authors": [
     "Adrian Darian",
     "Brian Hungerman",
     "Dan Tran",
     "Denis Vashchenko"
-  ],
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
-  }
+  ]
 }
