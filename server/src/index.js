@@ -1,7 +1,16 @@
 'use strict';
 
 const { Webhook, ExpressJS, Lambda } = require('jovo-framework');
-const { alexa } = require ('./alexa.js');
+const { alexa } = require('./alexa.js');
+const DB = require('./dynamo');
+const Dynamo = new DB();
+
+const putMolecule = async event => {
+    let { molecule } = JSON.parse(event.body);
+    let amount = event.pathParameters.amount;
+    let ID = `${molecule}-${amount}`;
+    return Dynamo.increment(ID, 'chemistry-api')
+}
 
 // ------------------------------------------------------------------
 // HOST CONFIGURATION
@@ -23,5 +32,9 @@ if (process.argv.indexOf('--webhook') > -1) {
 
 // AWS Lambda
 exports.handler = async (event, context, callback) => {
+    if (event.httpMethod === 'PUT') {
+        let response = await putMolecule(event)
+        return done(response);
+    }
     await alexa.handle(new Lambda(event, context, callback));
 };

@@ -29,8 +29,7 @@ alexa.setHandler({
     return this.toIntent('ClassroomIntent');
   },
   ClassroomIntent() {
-    this.ask('Would you like to add a molecule?');
-    this.tell('You have added' + this.)
+    this.ask('Which molecule would you like to add?');
   }
 });
 
