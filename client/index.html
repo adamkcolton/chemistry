@@ -28,14 +28,15 @@
     <script>
         var i = 0;
         var n = 10;
-        var id = 0;
+        var atomId = 0;
+        var moleculeId = 0;
         /* List of molecules on screen*/
 
-        function Molecule(name, posX, posY, posZ){
+        function Molecule(name, posX, posY, posZ) {
             this.name = name;
             this.posX = posX;
             this.posY = posY;
-            this. posZ = posZ
+            this.posZ = posZ
             this.atomList = [];
         }
 
@@ -104,32 +105,30 @@
 
         function addMolecule(molecule) {
             moleculeList.push(new Molecule(molecule, 0, 0, 0));
-
-            var index = 0;
-
-            switch (moleculeList[index].name) {
+            switch (moleculeList[moleculeId].name) {
                 case 'glucose':
-                    addAtoms('carbon', 6, index);
-                    addAtoms('oxygen', 6, index);
-                    addAtoms('hydrogen', 12, index);
+                    addAtoms('carbon', 6);
+                    addAtoms('oxygen', 6);
+                    addAtoms('hydrogen', 12);
                     break;
                 case 'water':
-                    addAtom('oxygen', 1, index);
-                    addAtom('hydrogen', 2, index);
+                    addAtom('oxygen', 1);
+                    addAtom('hydrogen', 2);
                     break;
             }
-
+            //Prob wrong place
+            moleculeId++;
 
         }
-        function addAtoms(atom, number, moleculeIndex) {
+        function addAtoms(atom, number) {
             for (var i = 0; i < number; i++) {
-                addAtom(atom, moleculeIndex);
+                addAtom(atom);
             }
         }
-        function addAtom(atom, moleculeIndex) {
-            moleculeList[moleculeIndex].atomList.push(id);
+        function addAtom(atom) {
+            moleculeList[moleculeId].atomList.push(atomId);
             $("#marker").append(
-                '<a-sphere id =\"' + "id" + (id++) + '\"color = ' + getColorOfAtom(atom) + ' position = "0 0 0" radius = \"' + getRadiusOfAtom(atom) + '\"></a-box>'
+                '<a-sphere id =\"' + "id" + (atomId++) + '\"color = ' + getColorOfAtom(atom) + ' position = "0 0 0" radius = \"' + getRadiusOfAtom(atom) + '\"></a-box>'
             );
         }
         function getColorOfAtom(atom) {
@@ -171,12 +170,12 @@
             //If not at target position animate
             var moleculePosition = [moleculeList[0].posX, moleculeList[0].posY, moleculeList[0].posZ];
 
-            for (let i = 0; i < id; i++) {
+            for (let i = 0; i < atomId; i++) {
                 var element = document.getElementById("id" + i);
                 if (element != null) {
                     var position = (document.getElementById("id" + i).getAttribute("position"));
                     //Need to have a way to get the moleculePosition for the function call.
-                    var targetPosition = calcTargetPosition(moleculePosition, moleculeList[0] ,i);
+                    var targetPosition = calcTargetPosition(moleculePosition, moleculeList[0], i);
 
                     var posX = calcPosChange(position.x, targetPosition[0]);
                     var posY = calcPosChange(position.y, targetPosition[1]);
@@ -192,7 +191,7 @@
             }
         }, 1000);
 
-        function calcTargetPosition(moleculePosition, molecule ,elementNumber) {
+        function calcTargetPosition(moleculePosition, molecule, elementNumber) {
             //Based on index see where you need to be. 
             var targetPosition = [];
             var offSet = GLUCOSE_POSITIONS[elementNumber].split(" ");
@@ -208,40 +207,105 @@
         }
 
         //Work on logic that would assign elements to others by groups. Based on IDs
-        function reassignElements(moleculeNumber){
+        function reassignElements(moleculeIndex) {
             //I have global variable that has all the molecules on the screen
             //Pass in molecule that would be broken down and append it to the global variable.
 
-            //Given the molecue index go to that molecue and see the elements that it can be broken into.
+            //Given the molecule index go to that molecule and see the elements that it can be broken into.
             //Prob will hardcode that an glucose can do specfic things. 
 
-            //Add 6O2 from somewhere could add it to the the molecueList
+            //Add 6O2 from somewhere could add it to the the moleculeList
 
-            brokenMolecue = molecueList[molecueNumber];
+            brokenMolecule = moleculeList[moleculeNumber];
 
-            switch(brokenMolecue.name){
-                case('glucose'):
-                    for(let i = 0; i < 6; i++){
-                        molecueList.push("h20", 0, 0, 0);
-                        molecueList[molecueList.length - 1].atomList.push(6 + i)
-                        molecueList[molecueList.length - 1].atomList.push(12 + 2)
-                        molecueList[molecueList.length - 1].atomList.push(13 + 2);
-                    }
-                    for(let i = 6; i < 12; i++){
-                        molecueList.push("co2", 0, 0, 0);
-                        molecueList[molecueList.length - 1].atomList.push(i);
-                        //Add O2 from the new thing.
-                        //molecueList[molecueList.length - 1].atomList.push(i);
-                        //molecueList[molecueList.length - 1].atomList.push(i);
-                    }
-                    break;
-                case('water'):
-                    break;
-                case('plutonium'):
-                    break;
-            }
-            molecueList.splice(moleculeNumber);   
+            switch (brokenMolecule.name) {
+                case ('glucose'):
+                    moleculeList.push('water', 0, 0, 0);
+                    moleculeId++;
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[6]);
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[12]);
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[13]);
 
+                    moleculeList.push('water', 0, 0, 0);
+                    moleculeId++;
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[7]);
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[14]);
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[15]);
+
+                    moleculeList.push('water', 0, 0, 0);
+                    moleculeId++;
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[8]);
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[16]);
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[17]);
+
+                    moleculeList.push('water', 0, 0, 0);
+                    moleculeId++;
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[9]);
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[18]);
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[19]);
+
+                    moleculeList.push('water', 0, 0, 0);
+                    moleculeId++;
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[10]);
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[20]);
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[21]);
+
+                    moleculeList.push('water', 0, 0, 0);
+                    moleculeId++;
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[11]);
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[22]);
+                    moleculeList[moleculeId].atomList.push(brokenMolecule.atomList[23]);
+
+
+                    moleculeList.push('carbon_dioxide', 0, 0, 0);
+                    moleculeId++;
+                    moleculeList[moleculeId].atomList.push(0);
+                    //Add O2 from the new thing.
+                    //moleculeList[moleculeId].atomList.push(i);
+                    //moleculeList[moleculeId].atomList.push(i);
+
+                    moleculeList.push('carbon_dioxide', 0, 0, 0);
+                    moleculeId++;
+                    moleculeList[moleculeId].atomList.push(1);
+                    //Add O2 from the new thing.
+                    //moleculeList[moleculeId].atomList.push(i);
+                    //moleculeList[moleculeId].atomList.push(i);
+
+                    moleculeList.push('carbon_dioxide', 0, 0, 0);
+                    moleculeId++;
+                    moleculeList[moleculeId].atomList.push(2);
+                    //Add O2 from the new thing.
+                    //moleculeList[moleculeId].atomList.push(i);
+                    //moleculeList[moleculeId].atomList.push(i);
+
+                    moleculeList.push('carbon_dioxide', 0, 0, 0);
+                    moleculeId++;
+                    moleculeList[moleculeId].atomList.push(3);
+                    //Add O2 from the new thing.
+                    //moleculeList[moleculeId].atomList.push(i);
+                    //moleculeList[moleculeId].atomList.push(i);
+
+                    moleculeList.push('carbon_dioxide', 0, 0, 0);
+                    moleculeId++;
+                    moleculeList[moleculeId].atomList.push(4);
+                    //Add O2 from the new thing.
+                    //moleculeList[moleculeId].atomList.push(i);
+                    //moleculeList[moleculeId].atomList.push(i);
+
+                    moleculeList.push('carbon_dioxide', 0, 0, 0);
+                    moleculeId++;
+                    moleculeList[moleculeId].atomList.push(5);
+                    //Add O2 from the new thing.
+                    //moleculeList[moleculeId].atomList.push(i);
+                    //moleculeList[moleculeId].atomList.push(i);
+
+            break;
+                case ('water'):
+            break;
+                case ('plutonium'):
+            break;
+        }
+        moleculeList.splice(moleculeNumber, 1);
         }
 
         // append();
