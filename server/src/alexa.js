@@ -25,36 +25,18 @@ alexa.use(
 
 alexa.setHandler({
   LAUNCH() {
-    return this.toIntent('ChemistryIntent');
+    // assign all values of molecules to 0
+    return this.toIntent('ClassroomIntent');
   },
-  ChemistryIntent() {
-    this.ask('What would you like to learn today?');
-    
-    switch (this.$inputs.lessonNumber.value) {
-      case '1':
-        this.tell('yeah aight');
-        this.toIntent('LessonOneIntent');
-      case '2':
-        this.tell('yeah aight');
-        this.toIntent('LessonTwoIntent');
-      default:
-        this.ask('Can you repeat the lesson please');
-        this.toIntent('ChemistryIntent');
-    }
-  },
-  LessonOneIntent() {
-    this.tell('Dan where are all my molecules?');
-    this.tell('You know, because we are learning about Molecular Structures!');
-    this.ask('What Molecular Structure would you like to learn today');
-  },
-  LessonTwoIntent() {
-    this.tell('Brian what is lesson two about?');
-    this.ask('Would you like to discuss, Stoichiometry?')
-    if (this.$inputs.response.value == 'yes') {
-      this.ask('What would you like to learn about Stoichiometry today?');
-      this.tell('yeah aight');
-    }
+  ClassroomIntent() {
+    this.ask('Would you like to add a molecule?');
+    this.tell('You have added' + this.)
   }
 });
+
+// s3.deleteObject(params = {}, callback) => AWS.REQUEST
+// s3.deleteObjects(params = {}, callback) => AWS.REQUEST
+// s3.putPublicAccessBlock(params = {}, callback) => AWS.REQUEST
+// s3.putObject(params = {}, callback) => AWS.REQUEST
 
 module.exports.alexa = alexa;
