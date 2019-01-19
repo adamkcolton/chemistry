@@ -27,30 +27,31 @@ app.get('/api/data', (req, res) => {
     "oxygen": { "count": 0 },
     "uranium": { "count": 0 }
   };
-  
+
   res.send(chemData);
 });
 
 
 const s3 = new aws.S3();
 params = {
-  Bucket: "s3/cruzhacks", 
+  Bucket: "s3/cruzhacks",
   Key: "TILES/Level4/A3_B3_C2/.par"
+}
 app.post('/api/alexa', (req, res) => {
-  aws.getSignedUrl('getObject', params, function(err, url){
-    console.log(url); 
-}); 
+    aws.getSignedUrl('getObject', params, function (err, url) {
+      console.log(url);
+    });
 
 
 
-});
-
-app.use((req, res) => {
-  res.status(404).json({
-    message: 'resource not found',
   });
-});
 
-http.listen(process.env.PORT || SERVER_PORT, () => {
-  console.log(`Server started on http://localhost:${SERVER_PORT}`);
-});
+  app.use((req, res) => {
+    res.status(404).json({
+      message: 'resource not found',
+    });
+  });
+
+  http.listen(process.env.PORT || SERVER_PORT, () => {
+    console.log(`Server started on http://localhost:${SERVER_PORT}`);
+  });
