@@ -3,6 +3,7 @@ const app = express();
 const http = require('http').Server(app);
 const path = require('path');
 const bodyParser = require('body-parser');
+const aws = require('aws-sdk');
 // const pt = require('periodic-table');
 
 const SERVER_PORT = 3000;
@@ -30,11 +31,15 @@ app.get('/api/data', (req, res) => {
   res.send(chemData);
 });
 
-app.post('/api/alexa', (req, res) => {
-  const alexaData = {
-    
 
-  }
+const s3 = new aws.S3();
+params = {
+  Bucket: "s3/cruzhacks", 
+  Key: "TILES/Level4/A3_B3_C2/.par"
+app.post('/api/alexa', (req, res) => {
+  aws.getSignedUrl('getObject', params, function(err, url){
+    console.log(url); 
+}); 
 
 
 
