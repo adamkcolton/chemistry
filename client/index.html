@@ -32,7 +32,41 @@
     <script>
         //For actually building the molecule.
         var i = 0;
-        var n = 4
+        var n = 4;
+
+        /* Glucose (C6H12O6) Properties */
+        var GLUCOSE_POSITIONS = [
+            /* Carbons (0-5) */
+            "-2.5 -.5 0",
+            "-1.5 .5 0",
+            "-.5 -.5 0",
+            ".5 .5 0",
+            "1.5, -.5 0",
+            "2.5, .5 0",
+            /* Oxygens (6-11) */
+            "-2.5 -1.5 0",
+            "-1.5 1.5 0",
+            "-.5 -1.5 0",
+            ".5 1.5 0",
+            "1.5, -1.5 0",
+            "2.5, 1.5 0",
+            /* Hydrogens (12-23) */
+            "-2.75 -1.75 0",
+            "-2.25 -1.75 0",
+            "-1.75 1.75 0",
+            "-1.25 1.75 0",
+            "-.75 -1.75 0",
+            "-.25 -1.75 0",
+            ".75 1.75 0",
+            ".25 1.75 0",
+            "1.75, -1.75 0",
+            "1.25, -1.75 0",
+            "2.75, 1.75 0",
+            "2.25, 1.75 0",
+        ];
+        var GLUCOSE_SCALE = 1;
+
+
         $(function () {
             var positions = [];
             for (let i = 0; i < n; i++) {
@@ -74,6 +108,11 @@
         function calcTargetPosition(overallPosition) {
             //Based on index see where you need to be. 
             var targetPosition = [];
+
+
+
+
+
 
 
             return targetPosition;
