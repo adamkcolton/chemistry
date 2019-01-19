@@ -66,3 +66,4 @@ package-lock.json
 
 # misc
 .vscode
+db/
