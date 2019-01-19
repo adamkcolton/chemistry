@@ -95,7 +95,7 @@
         var WATER_SCALE = 1;
 
         function addMolecule(molecule) {
-            molecules.append(molecule);
+            molecules.push(molecule);
 
             switch (molecule) {
                 case 'glucose':
@@ -144,7 +144,7 @@
             return pos;
         }
 
-        function moveToPosition() {
+       setInterval(function() {
             //If not at target position animate
             var moleculePosition = [0, 0, 0];
             console.log("Moving");
@@ -171,7 +171,7 @@
                     console.log(i + " does not exist");
                 }
             }
-        }
+        }, 1000);
 
         function calcTargetPosition(moleculePosition, elementNumber) {
             //Based on index see where you need to be. 
@@ -186,8 +186,8 @@
 
             return targetPosition;
         }
-        append();
-        setInterval(moveToPosition, 1000);
+        // append();
+        // setInterval(moveToPosition, 1000);
 
         // axios.get('/api/data/').then(function (symbol) {
         //     //Build Function gets called or I can have it in here.
