@@ -114,7 +114,7 @@
         }
         function addAtom(atom) {
             $("#marker").append(
-                '<a-sphere id =\"' + "id" + (i++) + '\"color = '+ getColorOfAtom(atom) +' position = "0 0 0" radius = ".1"></a-box>'
+                '<a-sphere id =\"' + "id" + (i++) + '\"color = ' + getColorOfAtom(atom) + ' position = "0 0 0" radius = ".1"></a-box>'
             );
         }
         function getColorOfAtom(atom) {
@@ -147,6 +147,7 @@
         function moveToPosition() {
             //If not at target position animate
             var moleculePosition = [0, 0, 0];
+            console.log("Moving");
             for (let i = 0; i < n; i++) {
                 var element = document.getElementById("id" + i);
                 if (element != null) {
@@ -157,13 +158,14 @@
                     var posY = parseInt(position[2]);
                     var posZ = parseInt(position[4]);
 
-                    while (posX != targetPosition[0] && posY != targetPosition[1] && posZ != targetPosition[3]) {
-                        posX = calcPosChange(posX, targetPosition[0]);
-                        posY = calcPosChange(posY, targetPosition[1]);
-                        posZ = calcPosChange(posZ, targetPosition[2]);
 
-                        document.getElementById("id" + i).setAttribute("position", posX + " " + posY + " " + posZ);
-                    }
+                    posX = calcPosChange(posX, targetPosition[0]);
+                    posY = calcPosChange(posY, targetPosition[1]);
+                    posZ = calcPosChange(posZ, targetPosition[2]);
+
+                    
+                    document.getElementById("id" + i).setAttribute("position", posX + " " + posY + " " + posZ);
+
                 }
                 else {
                     console.log(i + " does not exist");
@@ -185,7 +187,7 @@
             return targetPosition;
         }
         append();
-        moveToPosition();
+        setInterval(moveToPosition, 1000);
 
         // axios.get('/api/data/').then(function (symbol) {
         //     //Build Function gets called or I can have it in here.
