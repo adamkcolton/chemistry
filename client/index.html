@@ -179,8 +179,8 @@
             //Based on index see where you need to be. 
             var targetPosition = [];
             var offSet = GLUCOSE_POSITIONS[elementNumber].split(" ");
-            var offSetX = parseInt(offSet[0]);
-            var offSetZ = parseInt(offSet[2]);
+            var offSetX = parseFloat(offSet[0]);
+            var offSetZ = parseFloat(offSet[2]);
 
             targetPosition[0] = moleculePosition[0] + offSetX;
             targetPosition[1] = moleculePosition[1];
@@ -188,6 +188,12 @@
 
             return targetPosition;
         }
+
+        //Work on logic that would assign elements to others by groups.
+        function reassignElements(){
+
+        }
+
         // append();
         // setInterval(moveToPosition, 1000);
 
