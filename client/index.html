@@ -31,12 +31,12 @@
             );
         }
 
-        axios.get('/api/symbol/').then(function (symbol){
+        axios.get('/api/data/').then(function (data){
             //Build Function gets called or I can have it in here.
-            console.log(symbol);
+            console.log(data.data.glucose.count);
             // buildMolecule(symbol);
         }).catch(function (error) { 
-            comsole.log(error);
+            console.log(error);
         });
 
         
