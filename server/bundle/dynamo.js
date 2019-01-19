@@ -56,11 +56,11 @@ module.exports = class DB {
     if (!ID) throw 'ID needed';
     let data;
     try {
-      data = await this.get('molecules', ID, table);
+      data = await this.get('molecules-amount', ID, table);
       if (!data.count) throw 'no count in data'
     } catch (err) {
       data = {
-        "molecules": ID,
+        "molecules-amount": ID,
         count: 0
       };
     };
