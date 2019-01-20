@@ -340,7 +340,7 @@ function reassignElements(moleculeIndex) {
     console.log("AFTER Change")
 }
 
-axios.get('/api/alexaData/').then(function (json) {
+axios.get('/api/mData/').then(function (json) {
     //Build Function gets called or I can have it in here.
     console.log(json);
     // console.log(json.data);
