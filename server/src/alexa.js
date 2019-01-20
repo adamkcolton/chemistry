@@ -24,18 +24,19 @@ alexa.use(
 // ------------------------------------------------------------------
 
 alexa.setHandler({
-  'LAUNCH': function () {
+  LAUNCH() {
     this.toIntent('ChemistryClassroom');
   },
 
-  'ChemistryClassroom': function () {
+  ChemistryClassroom() {
     this.ask('Welcome, would you like to add a molecule?');
+    return this.totint
   },
 
-  'AddIntent': function () {
+  AddIntent() {
     this.tell('Add six oxygen molecules');
   },
-  'AddedTest': function () {
+  AddedTest(){
     this.ask('I have added six oxygen molecules');
   }
 });
