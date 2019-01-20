@@ -326,11 +326,11 @@ function reassignElements(moleculeIndex) {
             break;
     }
 }
-// axios.get('/api/alexaData/').then(function (json) {
-//     //Build Function gets called or I can have it in here.
-//     console.log(json);
-//     // console.log(json.data);
-//     // buildMolecule(symbol);
-// }).catch(function (error) {
-//     console.log(error);
-// });
+ axios.get('https://kex84xe01m.execute-api.us-east-1.amazonaws.com/prod/entries').then(function (json) {
+     //Build Function gets called or I can have it in here.
+     console.log(json);
+     // console.log(json.data);
+     // buildMolecule(symbol);
+ }).catch(function (error) {
+     console.log(error);
+ });
