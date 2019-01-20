@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "ask-sdk": "^2.3.0"
+    "ask-sdk": "^2.3.0",
+    "node-fetch": "^2.3.0"
   }
 }
