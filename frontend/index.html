@@ -3,23 +3,7 @@
 
   </head>
   <body>
-    <h1>Latest guestbook entries:</h1>
-    <div id='entries'>
-
-    </div>
-
-    <h1>New entry</h1>
-    <form>
-      <label for='msg'>Message</label>
-      <textarea id='msg'></textarea>
-
-      <button id='submitButton'>Submit</button>
-    </form>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script type="type/javascript">
-      let API_URL = 'https://kex84xe01m.execute-api.us-east-1.amazonaws.com/prod/entries';
-
+    <script type="text/javascript">
       $(document).ready(function() {
         $.ajax({
           type: 'GET',
@@ -46,7 +30,6 @@
             location.reload();
           }
         });
-      })
-    </script>
+      })</script>
   </body>
 </html>
