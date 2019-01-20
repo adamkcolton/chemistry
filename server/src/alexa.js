@@ -25,13 +25,31 @@ alexa.use(
 
 alexa.setHandler({
   LAUNCH() {
-    // assign all values of molecules to 0
-    return this.toIntent('ClassroomIntent');
+    this.toIntent('ChemistryClassroom');
   },
-  ClassroomIntent() {
-    this.ask('Which molecule would you like to add?');
+
+  ChemistryClassroom() {
+    this.ask('Welcome, would you like to add a molecule?');
+    return this.totint
+  },
+
+  AddIntent() {
+    this.tell('Add six oxygen molecules');
+  },
+  AddedTest(){
+    this.ask('I have added six oxygen molecules');
   }
 });
+// this.tell('Add one glucose');
+//     this.ask('Done');
+//     this.tell('Add six Oxygen');
+//     this.ask('Done');
+//     this.tell('Add activation energy');
+//     this.ask('Kaplow!');
+//     this.tell('Clear');
+//     this.ask('Done');
+//     this.tell('Add Uranium');
+//     this.ask('Carefull with that!');
 
 // s3.deleteObject(params = {}, callback) => AWS.REQUEST
 // s3.deleteObjects(params = {}, callback) => AWS.REQUEST
