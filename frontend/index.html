@@ -25,7 +25,7 @@
           type: 'GET',
           url: API_URL,
 
-          success: function(date) {
+          success: function(data) {
             $('#entries').html('');
 
             data.Items.forEach(function(guestbookItem) {
@@ -34,6 +34,19 @@
           }
         });
       });
+
+      $('#submitButton').ready(function() {
+        $.ajax({
+          type: 'POST',
+          url: API_URL,
+          data: JSON.stringify({"message": $('#msg').val()}),
+          contentType: 'application/json'
+
+          success: function(data) {
+            location.reload();
+          }
+        });
+      })
     </script>
   </body>
 </html>
