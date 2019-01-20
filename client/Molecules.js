@@ -92,14 +92,14 @@ var WATER_POSITIONS = [
 ]
 var WATER_SCALE = 1;
 
-function resetMolecule(){
+function resetMolecule() {
     moleculeId = 0;
     atomId = 0;
     console.log(moleculeList);
-    for(var i = 0; i < 36; i++){
+    for (var i = 0; i < 36; i++) {
         document.getElementById("id" + i).outerHTML = "";
 
-        if(i < reactionId){
+        if (i < reactionId) {
             document.getElementById("reaction" + i).outerHTML = "";
         }
     }
@@ -110,14 +110,18 @@ function resetMolecule(){
 }
 
 function buttonPress() {
-    reassignElements(0);
-    setTimeout(function(){
-        resetMolecule();
-    }, 2000);
+    if (moleculeList[0].name == 'glucose') {
+        reassignElements(0);
+        setTimeout(function () {
+            resetMolecule();
+        }, 2000);
+    }
+    else {
+        addReaction();
+    }
 }
 
 function addMolecule(molecule) {
-    console.log(moleculeList);
     moleculeList.push(new Molecule(molecule, Math.random() * WORLD_SIZE - WORLD_SIZE / 2, 0, Math.random() * WORLD_SIZE - WORLD_SIZE / 2));
     switch (moleculeList[moleculeId].name) {
         case 'glucose':
@@ -133,7 +137,9 @@ function addMolecule(molecule) {
             addAtoms('oxygen', 2);
             break;
         case 'uranium':
-            addAtom('uranium', 2);
+            addAtom('uranium', 1);
+        case 'helium':
+            addAtom('helium', 1);
     }
     moleculeId++;
 }
@@ -151,12 +157,19 @@ function addAtom(atom) {
 
 function addReaction(reactionId) {
     MAX_SPEED = .6;
-    $("#marker").append(
-        '<a-sphere id = "reaction' + reactionId +'\"color = "yellow" position = \"' + (Math.random() * WORLD_SIZE - WORLD_SIZE / 2) + " " + 0 + " " + (Math.random() * WORLD_SIZE - WORLD_SIZE / 2) + '\" radius = ".05"><a-animation attribute = "position" to = \"' + (Math.random() * WORLD_SIZE - WORLD_SIZE / 2) + " " + 0 + " " + (Math.random() * WORLD_SIZE - WORLD_SIZE / 2) + '\" from = "0 0 0" direction = "alternate" dur = "300"></a-animation><a-animation attribute = "scale" direction = "alternate" begin = "100" from = "0 0 0" to = "9 9 9" repeat = "indefinite"></a-animation><a-animation attribute = "visible" dur = "2000" from = "true" to = "false"></a-animation></a-sphere>'
-    );
-        // setTimeout(new function() { 
-        //     MAX_SPEED = .06
-        // }, 500);
+    if (moleculeList[0].name == 'glucose') {
+        $("#marker").append(
+            '<a-sphere id = "reaction' + reactionId + '\"color = "yellow" position = \"' + (Math.random() * WORLD_SIZE - WORLD_SIZE / 2) + " " + 0 + " " + (Math.random() * WORLD_SIZE - WORLD_SIZE / 2) + '\" radius = ".05"><a-animation attribute = "position" to = \"' + (Math.random() * WORLD_SIZE - WORLD_SIZE / 2) + " " + 0 + " " + (Math.random() * WORLD_SIZE - WORLD_SIZE / 2) + '\" from = "0 0 0" direction = "alternate" dur = "300"></a-animation><a-animation attribute = "scale" direction = "alternate" begin = "100" from = "0 0 0" to = "9 9 9" repeat = "indefinite"></a-animation><a-animation attribute = "visible" dur = "2000" from = "true" to = "false"></a-animation></a-sphere>'
+        );
+    }
+    else {
+        $("#marker").append(
+            '<a-sphere id = "reaction' + reactionId + '\" color =  \"' + getColorOfAtom('helium') + '\" position = \"' + moleculeList[0].posX + " " + 0 + " " + moleculeList[0].posZ + '\" radius = ".1"><a-animation attribute = "position" to = \"' + (Math.random() * WORLD_SIZE - WORLD_SIZE / 2) + " " + 0 + " " + (Math.random() * WORLD_SIZE - WORLD_SIZE / 2) + '\" from = "0 0 0" direction = "normal" dur = "300" </a-animation></a-sphere>'
+        );
+    }
+    // setTimeout(new function() { 
+    //     MAX_SPEED = .06
+    // }, 500);
 }
 
 function getColorOfAtom(atom) {
@@ -165,6 +178,7 @@ function getColorOfAtom(atom) {
         case 'oxygen': return "red";
         case 'hydrogen': return "white";
         case 'uranium': return "green";
+        case 'helium': return 'pink';
     }
 }
 function getRadiusOfAtom(atom) {
@@ -172,7 +186,8 @@ function getRadiusOfAtom(atom) {
         case 'carbon': return .9;
         case 'oxygen': return .6;
         case 'hydrogen': return .3;
-        case 'uranium': return 1;
+        case 'uranium': return 3;
+        case 'helium': return .3;
     }
 }
 function getYOfAtom(atom) {
@@ -181,6 +196,7 @@ function getYOfAtom(atom) {
         case 'oxygen': return -.05;
         case 'hydrogen': return 0;
         case 'uranium': return 0;
+        case 'helium': return 0;
     }
 }
 
@@ -216,7 +232,6 @@ setInterval(function () {
 /* Move molecules around */
 var molecule_to_update = 0;
 setInterval(function () {
-    console.log(moleculeId + " " + molecule_to_update);
     moleculeList[molecule_to_update].posX = Math.random() * WORLD_SIZE - WORLD_SIZE / 2;
     moleculeList[molecule_to_update++].posZ = Math.random() * WORLD_SIZE - WORLD_SIZE / 2;
     if (molecule_to_update >= moleculeId) molecule_to_update = 0;
