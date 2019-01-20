@@ -1,0 +1,8 @@
+{
+  "name": "dynamodb_lambda_function_read",
+  "description": "",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::531604924731:role/dynamodb_lambda_function_read_lambda_function",
+  "environment": {}
+}
