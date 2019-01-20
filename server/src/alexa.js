@@ -25,19 +25,27 @@ alexa.use(
 
 alexa.setHandler({
   LAUNCH() {
-    this.toIntent('ChemistryClassroom');
+    let speech = 'Welcome to chemistry class!';
+    let reprompt = 'Please answer with yes or no.';
+    this.followUpState('ChemistryClassroom').ask(speech, reprompt);
   },
 
-  ChemistryClassroom() {
-    this.ask('Welcome, would you like to add a molecule?');
-    return this.totint
-  },
-
-  AddIntent() {
-    this.tell('Add six oxygen molecules');
-  },
-  AddedTest(){
-    this.ask('I have added six oxygen molecules');
+  'ChemistryClassroom': {
+    addOxygen() {
+      this.ask('adding six oxygen');
+    },
+    addGlucose() {
+      this.ask('adding one glucose');
+    },
+    addActivationEnergy() {
+      this.ask('adding activation energy');
+    },
+    resetClass() {
+      this.ask('Done');
+    },
+    addUranium() {
+      this.ask('Be careful!');
+    }
   }
 });
 // this.tell('Add one glucose');
