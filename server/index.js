@@ -34,12 +34,18 @@ app.get('/api/chemData', (req, res) => {
 });
 
 app.get('/api/mData', (req, res) => {
+  var allElements = pt.all();
   var o = pt.elements.Oxygen;
   var h = pt.elements.Hydrogen;
-  var c = pt.elements.Carbon;
   var u = pt.elements.Uranium;
-  
-  res.send(o.symbol)
+
+  // var molecules = [o,h,u];
+  // console.log(molecules[0].symbol);
+  // console.log(o.symbol);
+  for (var i = 0; i < allElements.length; i++) {
+    console.log(allElements[i].name + ",");
+  }
+
 });
 
 
