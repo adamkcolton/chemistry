@@ -17,13 +17,16 @@ function Molecule(name, posX, posY, posZ) {
 var moleculeList = [];
 var reactionList = [];
 /* Replace with axios request */
-addMolecule('glucose');
-addMolecule('oxygen');
-addMolecule('oxygen');
-addMolecule('oxygen');
-addMolecule('oxygen');
-addMolecule('oxygen');
-addMolecule('oxygen');
+
+
+//TODO : Do these on a button press.
+// addMolecule('glucose');
+// addMolecule('oxygen');
+// addMolecule('oxygen');
+// addMolecule('oxygen');
+// addMolecule('oxygen');
+// addMolecule('oxygen');
+// addMolecule('oxygen');
 /* Glucose (C6H12O6) Properties */
 var GLUCOSE_POSITIONS = [
     /* Carbons (0-5) */
@@ -92,7 +95,6 @@ function resetMolecule() {
     moleculeList = [];
     reactionId = 0;
     molecule_to_update = 0;
-    addMolecule('uranium');
 }
 function buttonPress() {
     if (moleculeList[0].name == 'glucose') {
@@ -105,6 +107,18 @@ function buttonPress() {
         setInterval(addReaction, 500);
     }
 }
+
+function addGlucose() {
+    addMolecule('glucose');
+}
+
+function addOxygen() {
+    addMolecule('oxygen');
+}
+function addUranium(){
+    addMolecule('uranium');
+}
+
 function addMolecule(molecule) {
     moleculeList.push(new Molecule(molecule, Math.random() * WORLD_SIZE - WORLD_SIZE / 2, 0, Math.random() * WORLD_SIZE - WORLD_SIZE / 2));
     switch (moleculeList[moleculeId].name) {
@@ -202,12 +216,14 @@ setInterval(function () {
     }
 }, 30);
 /* Move molecules around */
-var molecule_to_update = 0;
-setInterval(function () {
-    moleculeList[molecule_to_update].posX = Math.random() * WORLD_SIZE - WORLD_SIZE / 2;
-    moleculeList[molecule_to_update++].posZ = Math.random() * WORLD_SIZE - WORLD_SIZE / 2;
-    if (molecule_to_update >= moleculeId) molecule_to_update = 0;
-}, 200);
+if (moleculeId > 0) {
+    setInterval(function () {
+        console.log(molecule_to_update + " AND " + moleculeId);
+        moleculeList[molecule_to_update].posX = Math.random() * WORLD_SIZE - WORLD_SIZE / 2;
+        moleculeList[molecule_to_update++].posZ = Math.random() * WORLD_SIZE - WORLD_SIZE / 2;
+        if (molecule_to_update >= moleculeId) molecule_to_update = 0;
+    }, 200);
+}
 function getMoleculeFromId(elementNumber) {
     for (var i = 0; i < moleculeId; i++) {
         if (moleculeList[i].atomList != null) {
@@ -220,6 +236,8 @@ function getMoleculeFromId(elementNumber) {
     }
     return "not found";
 }
+
+
 function getAtomIndexFromId(elementNumber) {
     for (var i = 0; i < moleculeId; i++) {
         if (moleculeList[i].atomList != null) {
@@ -308,11 +326,11 @@ function reassignElements(moleculeIndex) {
             break;
     }
 }
-axios.get('/api/mData').then(function (molecule) {
-    //Build Function gets called or I can have it in here.
-    console.log(molecule);
-    // console.log(json.data);
-    // buildMolecule(symbol);
-}).catch(function (error) {
-    console.log(error);
-});
+// axios.get('/api/alexaData/').then(function (json) {
+//     //Build Function gets called or I can have it in here.
+//     console.log(json);
+//     // console.log(json.data);
+//     // buildMolecule(symbol);
+// }).catch(function (error) {
+//     console.log(error);
+// });
