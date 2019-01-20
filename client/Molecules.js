@@ -133,8 +133,6 @@ setInterval(function () {
                     if (index == -1) {
                         index = getIdFromMoleculeType('uranium');
                         if (index != -1) {
-                            document.getElementById('myModal').style.display = "block";
-                            document.getElementById('modal-content-p').innerHTML = "Uranium 238 is highly radioactive!";
                         }
                     }
                     else {
@@ -152,7 +150,7 @@ setInterval(function () {
     }).catch(function (error) {
         console.log(error);
     });
-}, 1000);
+}, 1500);
 
 function resetMolecules() {
     moleculeId = 0;
@@ -174,7 +172,6 @@ function buttonPress() {
     if (index == -1) {
         index = getIdFromMoleculeType('uranium');
         if (index != -1) {
-            document.getElementById('myModal').style.display = "block";
         }
     }
     else {
@@ -182,7 +179,7 @@ function buttonPress() {
     }
     setTimeout(function () {
         document.getElementById('myModal').style.display = "none";
-    }, 1000);
+    }, 1500);
     reassignElements(index);
 }
 
