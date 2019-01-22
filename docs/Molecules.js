@@ -132,15 +132,25 @@ setInterval(function () {
                     var index = getIdFromMoleculeType('glucose');
                     if (index == -1) {
                         index = getIdFromMoleculeType('uranium');
+                        if (index != -1) {
+                        }
+                    }
+                    else {
+                        document.getElementById('myModal').style.display = "block";
+                        document.getElementById('modal-content-p').innerHTML = "C6H12O6 + 6 O2 -> 6 H20 + 6 CO2";
                     }
                     reassignElements(index);
+
+                    setTimeout(function () {
+                        document.getElementById('myModal').style.display = "none";
+                    }, 900);
                     break;
             }
         }
     }).catch(function (error) {
         console.log(error);
     });
-}, 1000);
+}, 1500);
 
 function resetMolecules() {
     moleculeId = 0;
@@ -161,7 +171,15 @@ function buttonPress() {
     var index = getIdFromMoleculeType('glucose');
     if (index == -1) {
         index = getIdFromMoleculeType('uranium');
+        if (index != -1) {
+        }
     }
+    else {
+        document.getElementById('myModal').style.display = "block";
+    }
+    setTimeout(function () {
+        document.getElementById('myModal').style.display = "none";
+    }, 1500);
     reassignElements(index);
 }
 
@@ -281,7 +299,7 @@ setInterval(function () {
         moleculeList[molecule_to_update++].posZ = Math.random() * WORLD_SIZE - WORLD_SIZE / 2;
         if (molecule_to_update >= moleculeId) molecule_to_update = 0;
     }
-}, 2000/moleculeId);
+}, 2000 / moleculeId);
 
 
 function getIdFromMoleculeType(type) {
