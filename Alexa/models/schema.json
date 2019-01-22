@@ -1,0 +1,795 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "chemist tutor",
+      "intents": [{
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "I need some guidance",
+            "I am confused",
+            "I would like some help",
+            "I do not understand",
+            "I am lost",
+            "can you please help me",
+            "I need help",
+            "help me",
+            "Chemistry tutor help me"
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+            "silence",
+            "be quiet",
+            "would you mind stopping",
+            "I would like you to stop",
+            "can you please stop",
+            "stop please",
+            "stop"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": [
+            "blue face",
+            "yeah aight"
+          ]
+        },
+        {
+          "name": "AddOxygenIntent",
+          "slots": [{
+            "name": "number",
+            "type": "AMAZON.NUMBER"
+          }],
+          "samples": [
+            "Oxygen",
+            "Add Oxygen",
+            "Add {number} Oxygen"
+          ]
+        },
+        {
+          "name": "AddUraniumIntent",
+          "slots": [{
+            "name": "number",
+            "type": "AMAZON.NUMBER"
+          }],
+          "samples": [
+            "Uranium",
+            "Add Uranium",
+            "Add {number} Uranium"
+          ]
+        },
+        {
+          "name": "AddHydrogenIntent",
+          "slots": [{
+            "name": "number",
+            "type": "AMAZON.NUMBER"
+          }],
+          "samples": [
+            "Hydrogen",
+            "Add Hydrogen",
+            "Add {number} Hydrogen"
+          ]
+        },
+        {
+          "name": "AddCarbonIntent",
+          "slots": [{
+            "name": "number",
+            "type": "AMAZON.NUMBER"
+          }],
+          "samples": [
+            "Carbon",
+            "Add Carbon",
+            "Add {number} Carbon"
+          ]
+        },
+        {
+          "name": "AddGlucoseIntent",
+          "slots": [{
+            "name": "number",
+            "type": "AMAZON.NUMBER"
+          }],
+          "samples": [
+            "Glucose",
+            "Add Glucose",
+            "Add {number} Glucose"
+          ]
+        },
+        {
+          "name": "AddElementIntent",
+          "slots": [{
+              "name": "element",
+              "type": "elements"
+            },
+            {
+              "name": "number",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "Add {number} of {element} atom",
+            "{number} {element}",
+            "{element}",
+            "Add {element}",
+            "Add {number} {element} atom",
+            "Add {number} {element}",
+            "Add {number} {element} atoms",
+            "Add {number} of {element} atoms"
+          ]
+        },
+        {
+          "name": "AddMoleculeIntent",
+          "slots": [{
+              "name": "molecule",
+              "type": "molecules"
+            },
+            {
+              "name": "number",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "{molecule}",
+            "Add {molecule}",
+            "{number} {molecule}",
+            "Add {number} {molecule}",
+            "Add {number} {molecule} atom",
+            "Add {number} of {molecule} atom",
+            "Add {number} {molecule} atoms",
+            "Add {number} of {molecule} atoms"
+          ]
+        },
+        {
+          "name": "AddClearIntent",
+          "slots": [],
+          "samples": [
+            "clear",
+            "yeah aight the screen",
+            "reset the screen",
+            "please clear the screen",
+            "clear the screen"
+          ]
+        },
+        {
+          "name": "AddReactIntent",
+          "slots": [],
+          "samples": [
+            "react",
+            "combine what's on the screen",
+            "combine what is on the screen",
+            "combine the molecules",
+            "combine the elements ",
+            "make a reaction"
+          ]
+        }
+      ],
+      "types": [{
+          "name": "elements",
+          "values": [{
+              "name": {
+                "value": "React"
+              }
+            },
+            {
+              "name": {
+                "value": "Clear"
+              }
+            },
+            {
+              "name": {
+                "value": "Hydrogen"
+              }
+            },
+            {
+              "name": {
+                "value": "Helium"
+              }
+            },
+            {
+              "name": {
+                "value": "Lithium"
+              }
+            },
+            {
+              "name": {
+                "value": "Beryllium"
+              }
+            },
+            {
+              "name": {
+                "value": "Boron"
+              }
+            },
+            {
+              "name": {
+                "value": "Carbon"
+              }
+            },
+            {
+              "name": {
+                "value": "Nitrogen"
+              }
+            },
+            {
+              "name": {
+                "value": "Oxygen"
+              }
+            },
+            {
+              "name": {
+                "value": "Fluorine"
+              }
+            },
+            {
+              "name": {
+                "value": "Neon"
+              }
+            },
+            {
+              "name": {
+                "value": "Sodium"
+              }
+            },
+            {
+              "name": {
+                "value": "Magnesium"
+              }
+            },
+            {
+              "name": {
+                "value": "Aluminum"
+              }
+            },
+            {
+              "name": {
+                "value": "Silicon"
+              }
+            },
+            {
+              "name": {
+                "value": "Phosphorus"
+              }
+            },
+            {
+              "name": {
+                "value": "Sulfur"
+              }
+            },
+            {
+              "name": {
+                "value": "Chlorine"
+              }
+            },
+            {
+              "name": {
+                "value": "Argon"
+              }
+            },
+            {
+              "name": {
+                "value": "Potassium"
+              }
+            },
+            {
+              "name": {
+                "value": "Calcium"
+              }
+            },
+            {
+              "name": {
+                "value": "Scandium"
+              }
+            },
+            {
+              "name": {
+                "value": "Titanium"
+              }
+            },
+            {
+              "name": {
+                "value": "Vanadium"
+              }
+            },
+            {
+              "name": {
+                "value": "Chromium"
+              }
+            },
+            {
+              "name": {
+                "value": "Manganese"
+              }
+            },
+            {
+              "name": {
+                "value": "Iron"
+              }
+            },
+            {
+              "name": {
+                "value": "Cobalt"
+              }
+            },
+            {
+              "name": {
+                "value": "Nickel"
+              }
+            },
+            {
+              "name": {
+                "value": "Copper"
+              }
+            },
+            {
+              "name": {
+                "value": "Zinc"
+              }
+            },
+            {
+              "name": {
+                "value": "Gallium"
+              }
+            },
+            {
+              "name": {
+                "value": "Germanium"
+              }
+            },
+            {
+              "name": {
+                "value": "Arsenic"
+              }
+            },
+            {
+              "name": {
+                "value": "Selenium"
+              }
+            },
+            {
+              "name": {
+                "value": "Bromine"
+              }
+            },
+            {
+              "name": {
+                "value": "Krypton"
+              }
+            },
+            {
+              "name": {
+                "value": "Rubidium"
+              }
+            },
+            {
+              "name": {
+                "value": "Strontium"
+              }
+            },
+            {
+              "name": {
+                "value": "Yttrium"
+              }
+            },
+            {
+              "name": {
+                "value": "Zirconium"
+              }
+            },
+            {
+              "name": {
+                "value": "Niobium"
+              }
+            },
+            {
+              "name": {
+                "value": "Molybdenum"
+              }
+            },
+            {
+              "name": {
+                "value": "Technetium"
+              }
+            },
+            {
+              "name": {
+                "value": "Ruthenium"
+              }
+            },
+            {
+              "name": {
+                "value": "Rhodium"
+              }
+            },
+            {
+              "name": {
+                "value": "Palladium"
+              }
+            },
+            {
+              "name": {
+                "value": "Silver"
+              }
+            },
+            {
+              "name": {
+                "value": "Cadmium"
+              }
+            },
+            {
+              "name": {
+                "value": "Indium"
+              }
+            },
+            {
+              "name": {
+                "value": "Tin"
+              }
+            },
+            {
+              "name": {
+                "value": "Antimony"
+              }
+            },
+            {
+              "name": {
+                "value": "Tellurium"
+              }
+            },
+            {
+              "name": {
+                "value": "Iodine"
+              }
+            },
+            {
+              "name": {
+                "value": "Xenon"
+              }
+            },
+            {
+              "name": {
+                "value": "Cesium"
+              }
+            },
+            {
+              "name": {
+                "value": "Barium"
+              }
+            },
+            {
+              "name": {
+                "value": "Lanthanum"
+              }
+            },
+            {
+              "name": {
+                "value": "Cerium"
+              }
+            },
+            {
+              "name": {
+                "value": "Praseodymium"
+              }
+            },
+            {
+              "name": {
+                "value": "Neodymium"
+              }
+            },
+            {
+              "name": {
+                "value": "Promethium"
+              }
+            },
+            {
+              "name": {
+                "value": "Samarium"
+              }
+            },
+            {
+              "name": {
+                "value": "Europium"
+              }
+            },
+            {
+              "name": {
+                "value": "Gadolinium"
+              }
+            },
+            {
+              "name": {
+                "value": "Terbium"
+              }
+            },
+            {
+              "name": {
+                "value": "Dysprosium"
+              }
+            },
+            {
+              "name": {
+                "value": "Holmium"
+              }
+            },
+            {
+              "name": {
+                "value": "Erbium"
+              }
+            },
+            {
+              "name": {
+                "value": "Thulium"
+              }
+            },
+            {
+              "name": {
+                "value": "Ytterbium"
+              }
+            },
+            {
+              "name": {
+                "value": "Lutetium"
+              }
+            },
+            {
+              "name": {
+                "value": "Hafnium"
+              }
+            },
+            {
+              "name": {
+                "value": "Tantalum"
+              }
+            },
+            {
+              "name": {
+                "value": "Tungsten"
+              }
+            },
+            {
+              "name": {
+                "value": "Rhenium"
+              }
+            },
+            {
+              "name": {
+                "value": "Osmium"
+              }
+            },
+            {
+              "name": {
+                "value": "Iridium"
+              }
+            },
+            {
+              "name": {
+                "value": "Platinum"
+              }
+            },
+            {
+              "name": {
+                "value": "Gold"
+              }
+            },
+            {
+              "name": {
+                "value": "Mercury"
+              }
+            },
+            {
+              "name": {
+                "value": "Thallium"
+              }
+            },
+            {
+              "name": {
+                "value": "Lead"
+              }
+            },
+            {
+              "name": {
+                "value": "Bismuth"
+              }
+            },
+            {
+              "name": {
+                "value": "Polonium"
+              }
+            },
+            {
+              "name": {
+                "value": "Astatine"
+              }
+            },
+            {
+              "name": {
+                "value": "Radon"
+              }
+            },
+            {
+              "name": {
+                "value": "Francium"
+              }
+            },
+            {
+              "name": {
+                "value": "Radium"
+              }
+            },
+            {
+              "name": {
+                "value": "Actinium"
+              }
+            },
+            {
+              "name": {
+                "value": "Thorium"
+              }
+            },
+            {
+              "name": {
+                "value": "Protactinium"
+              }
+            },
+            {
+              "name": {
+                "value": "Uranium"
+              }
+            },
+            {
+              "name": {
+                "value": "Neptunium"
+              }
+            },
+            {
+              "name": {
+                "value": "Plutonium"
+              }
+            },
+            {
+              "name": {
+                "value": "Americium"
+              }
+            },
+            {
+              "name": {
+                "value": "Curium"
+              }
+            },
+            {
+              "name": {
+                "value": "Berkelium"
+              }
+            },
+            {
+              "name": {
+                "value": "Californium"
+              }
+            },
+            {
+              "name": {
+                "value": "Einsteinium"
+              }
+            },
+            {
+              "name": {
+                "value": "Fermium"
+              }
+            },
+            {
+              "name": {
+                "value": "Mendelevium"
+              }
+            },
+            {
+              "name": {
+                "value": "Nobelium"
+              }
+            },
+            {
+              "name": {
+                "value": "Lawrencium"
+              }
+            },
+            {
+              "name": {
+                "value": "Rutherfordium"
+              }
+            },
+            {
+              "name": {
+                "value": "Dubnium"
+              }
+            },
+            {
+              "name": {
+                "value": "Seaborgium"
+              }
+            },
+            {
+              "name": {
+                "value": "Bohrium"
+              }
+            },
+            {
+              "name": {
+                "value": "Hassium"
+              }
+            },
+            {
+              "name": {
+                "value": "Meitnerium"
+              }
+            },
+            {
+              "name": {
+                "value": "Darmstadtium"
+              }
+            },
+            {
+              "name": {
+                "value": "Roentgenium"
+              }
+            },
+            {
+              "name": {
+                "value": "Copernicium"
+              }
+            },
+            {
+              "name": {
+                "value": "Nihonium"
+              }
+            },
+            {
+              "name": {
+                "value": "Flerovium"
+              }
+            },
+            {
+              "name": {
+                "value": "Moscovium"
+              }
+            },
+            {
+              "name": {
+                "value": "Livermorium"
+              }
+            },
+            {
+              "name": {
+                "value": "Tennessine"
+              }
+            },
+            {
+              "name": {
+                "value": "Oganesson"
+              }
+            }
+          ]
+        },
+        {
+          "name": "molecules",
+          "values": [{
+              "name": {
+                "value": "Water"
+              }
+            },
+            {
+              "name": {
+                "value": "Glucose"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

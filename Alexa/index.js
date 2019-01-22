@@ -22,12 +22,13 @@ const LaunchRequestHandler = {
 
 const AddOxygenIntentHandler = {
   canHandle(handlerInput) {
+    console.log("handleInput: ",handlerInput.requestEnvelope.request.intent.name);
     return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
       handlerInput.requestEnvelope.request.intent.name === 'AddOxygenIntent';
   },
   handle(handlerInput) {
     const number = handlerInput.requestEnvelope.request.intent.slots.number.value;
-    // console.log("request: ", number);
+    console.log("request: ", handlerInput);
     const speechText = `${number} Oxygen have been added`;
 
     const body = {
@@ -186,74 +187,75 @@ const AddGlucoseIntentHandler = {
   }
 };
 
-const AddElementIntentHandler = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
-      handlerInput.requestEnvelope.request.intent.name === 'AddElementIntent';
-  },
-  handle(handlerInput) {
-    const number = handlerInput.requestEnvelope.request.intent.slots.number.value;
-    const element = 'Oxygen';
-    const speechText = `${number} ${element} has been added`;
+// const AddElementIntentHandler = {
+//   canHandle(handlerInput) {
+//     return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
+//       handlerInput.requestEnvelope.request.intent.name === 'AddElementIntent';
+//   },
+//   handle(handlerInput) {
+//     console.log()
+//     const number = handlerInput.requestEnvelope.request.intent.slots.number.value;
+//     const element = 'Oxygen';
+//     const speechText = `${number} ${element} has been added`;
 
-    const body = {
-      element: element,
-      amount: number,
-    };
+//     const body = {
+//       element: element,
+//       amount: number,
+//     };
 
-    fetch('https://kex84xe01m.execute-api.us-east-1.amazonaws.com/prod/entries', {
-        method: 'post',
-        body: JSON.stringify(body),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      })
-      .then(res => res.json())
-      .then(json => console.log(json));
+//     fetch('https://kex84xe01m.execute-api.us-east-1.amazonaws.com/prod/entries', {
+//         method: 'post',
+//         body: JSON.stringify(body),
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//       })
+//       .then(res => res.json())
+//       .then(json => console.log(json));
 
 
-    const response = handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard('Element', speechText)
-      .getResponse();
+//     const response = handlerInput.responseBuilder
+//       .speak(speechText)
+//       .withSimpleCard('Element', speechText)
+//       .getResponse();
 
-    return response;
-  }
-};
+//     return response;
+//   }
+// };
 
-const AddMoleculeIntentHandler = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
-      handlerInput.requestEnvelope.request.intent.name === 'AddMoleculeIntent';
-  },
-  handle(handlerInput) {
-    const number = handlerInput.requestEnvelope.request.intent.slots.number.value;
-    const molecule = 'Glucose';
-    const speechText = `${number} ${molecule} has been added`;
+// const AddMoleculeIntentHandler = {
+//   canHandle(handlerInput) {
+//     return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
+//       handlerInput.requestEnvelope.request.intent.name === 'AddMoleculeIntent';
+//   },
+//   handle(handlerInput) {
+//     const number = handlerInput.requestEnvelope.request.intent.slots.number.value;
+//     const molecule = 'Glucose';
+//     const speechText = `${number} ${molecule} has been added`;
 
-    const body = {
-      element: molecule,
-      amount: number,
-    };
+//     const body = {
+//       element: molecule,
+//       amount: number,
+//     };
 
-    fetch('https://kex84xe01m.execute-api.us-east-1.amazonaws.com/prod/entries', {
-        method: 'post',
-        body: JSON.stringify(body),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      })
-      .then(res => res.json())
-      .then(json => console.log(json));
+//     fetch('https://kex84xe01m.execute-api.us-east-1.amazonaws.com/prod/entries', {
+//         method: 'post',
+//         body: JSON.stringify(body),
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//       })
+//       .then(res => res.json())
+//       .then(json => console.log(json));
 
-    const response = handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard('Molecule', speechText)
-      .getResponse();
+//     const response = handlerInput.responseBuilder
+//       .speak(speechText)
+//       .withSimpleCard('Molecule', speechText)
+//       .getResponse();
 
-    return response;
-  }
-};
+//     return response;
+//   }
+// };
 
 const AddClearIntentHandler = {
   canHandle(handlerInput) {
@@ -290,7 +292,7 @@ const AddClearIntentHandler = {
 const AddReactIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
-      handlerInput.requestEnvelope.request.intent.name === 'AddreactIntent';
+      handlerInput.requestEnvelope.request.intent.name === 'AddReactIntent';
   },
   handle(handlerInput) {
     const speechText = 'Making a Reaction';
@@ -405,8 +407,8 @@ exports.handler = Alexa.SkillBuilders.custom()
     AddCarbonIntentHandler,
     AddUraniumIntentHandler,
     AddGlucoseIntentHandler,
-    AddElementIntentHandler,
-    AddMoleculeIntentHandler,
+    // AddElementIntentHandler,
+    // AddMoleculeIntentHandler,
     AddClearIntentHandler,
     AddReactIntentHandler,
     HelpIntentHandler,
